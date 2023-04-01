@@ -20,4 +20,21 @@ async function deleteUser(req,res){
 }
 
 
-export default {getAllUsers, createUser, deleteUser}
+async function updateUser(req,res){
+    const user = await User.update(req.body,
+        {
+            where: {
+                id: req.params.id
+            }
+        }
+        )
+    res.json(user)
+    }
+
+    async function getUserById(req,res){
+        const user = await User.findByPk(req.params.id)
+        res.json(user)
+    }
+
+
+export default {getAllUsers, createUser, deleteUser, updateUser, getUserById}
